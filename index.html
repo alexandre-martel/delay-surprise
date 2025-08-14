@@ -132,7 +132,7 @@ updateCountdown();
 const dailyData = [
     {
         title: "Avant le début de l'aventure",
-        text: "On a eu plein de super moment avant de commencer à se voir plus sérieusement. \n C'était d'abord avec Yoann, tous les trois, puis après j'ai eu des sentiments pur toi. Je te trouvais déja rayonnante et qui me donnait le sourire. \n Malheuresement je n'ai pas beaucoup de photos de ces moments. \n Les quelques projets de Centrale qu'on a eu ensemble étaient des moments au j'étais au anges de te voir \n comme sur la première photo où j'avais beaucoup rigolé avec toi :) \n La fois où tu as accepté de venir dans les Cata était un des plus beaux jours de ma vie à l'époque (largement remplacé par toi ensuite) \n J'ai sauté de joie et j'ai crié partout, parlé a Paul et Oxana etc etc.... j'ai si heureux ! \n En tout cas c'était des super sortie et je penses qu'elles t'ont plus aussi ! \n Attend demain pour voir de nouvelles photos et de nouveaux souvenirs ! \n\n PS : Je t'aime Marie ! ",
+        text: "On a eu plein de super moment avant de commencer à se voir plus sérieusement. \n C'était d'abord avec Yoann, tous les trois, puis après j'ai eu des sentiments pur toi. Je te trouvais déja rayonnante et qui me donnait le sourire. \n Malheuresement je n'ai pas beaucoup de photos de ces moments. \n Les quelques projets de Centrale qu'on a eu ensemble étaient des moments au j'étais au anges de te voir \n comme sur la première photo où j'avais beaucoup rigolé avec toi :) \n La fois où tu as accepté de venir dans les Cata était un des plus beaux jours de ma vie à l'époque (largement remplacé par toi ensuite) \n J'ai sauté de joie et j'ai crié partout, parlé a Paul et Oxana etc etc.... j'ai si heureux ! \n En tout cas c'était des super sortie et je penses qu'elles t'ont plus aussi ! \n Attend demain pour voir de nouvelles photos et de nouveaux souvenirs !",
         images: ["images/Cata1.jpeg","images/Cata2.jpeg", "images/Deb1.jpeg"]
     },
     {
@@ -210,6 +210,7 @@ const dailyHTML = `
         <h2>${item.title}</h2>
         <p>${item.text}</p>
         ${item.images.map(img => `<img src="${img}" alt="photo souvenir">`).join('')}
+        <p>PS : Je t'aime Marie !</p>
     </div>
 `;
 dailyList.innerHTML = dailyHTML;
