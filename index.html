@@ -4,82 +4,89 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pour Marie 💜</title>
+
+<!-- Favicon A -->
+<link rel="icon" href="favicon.png" type="image/png">
+
 <style>
-    /* ---- Couleurs nuit violette ---- */
-    body {
-        margin: 0;
-        font-family: 'Arial', sans-serif;
-        color: #e0d7ff;
-        overflow-x: hidden;
-    }
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #e0d7ff;
+    overflow-x: hidden;
+}
 
-    /* ---- Fond étoilé avec miroir et zoom ---- */
-    .stars {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background: url('https://images.unsplash.com/photo-1465101162946-4377e57745c3?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Zm9uZCUyMGQnJUMzJUE5Y3JhbiUyMGNpZWwlMjBub2N0dXJuZXxlbnwwfHwwfHx8MA%3D%3D') no-repeat center center;
-        background-size: cover;
-        background-repeat: repeat;
-        background-position: center;
-        transform: scaleX(-1) scaleY(-1); /* miroir pour éviter les transitions visibles */
-        z-index: -1;
-        filter: brightness(0.3); /* assombrit le fond pour faire ressortir le texte */
-    }
+.stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url('images/fond_espace.jpg') no-repeat center center;
+    background-size: cover;
+    background-repeat: repeat;
+    transform: scaleX(-1) scaleY(-1);
+    z-index: -1;
+    filter: brightness(0.3);
+}
 
-    /* ---- Overlay pour améliorer contraste du texte ---- */
-    .overlay {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background: rgba(10, 0, 30, 0.5);
-        z-index: -1;
-    }
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 0, 30, 0.5);
+    z-index: -1;
+}
 
-    /* ---- Conteneur principal ---- */
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        text-align: center;
-        padding: 20px;
-        text-shadow: 0 0 10px rgba(0,0,0,0.7);
-    }
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+    text-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
 
-    h1 {
-        font-size: 3em;
-        margin-bottom: 0.2em;
-        color: #d9b3ff;
-        text-shadow: 2px 2px 8px #000000;
-    }
+h1 {
+    font-size: 3em;
+    margin-bottom: 0.2em;
+    color: #d9b3ff;
+    text-shadow: 2px 2px 8px #000000;
+}
 
-    .countdown {
-        font-size: 2em;
-        margin: 20px 0;
-        text-shadow: 1px 1px 5px #000000;
-    }
+.countdown {
+    font-size: 2em;
+    margin: 20px 0;
+    text-shadow: 1px 1px 5px #000000;
+}
 
-    .message-box {
-        background: rgba(30, 0, 60, 0.6);
-        border-radius: 15px;
-        padding: 25px;
-        max-width: 600px;
-        margin-top: 20px;
-        text-align: left;
-        word-wrap: break-word;
-        box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
+.message-box {
+    background: rgba(30, 0, 60, 0.6);
+    border-radius: 15px;
+    padding: 25px;
+    max-width: 800px;
+    margin-top: 20px;
+    text-align: left;
+    word-wrap: break-word;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
 
-    a {
-        color: #ffb3ff;
-        text-decoration: none;
-    }
+a { color: #ffb3ff; text-decoration: none; }
+a:hover { text-decoration: underline; }
 
-    a:hover {
-        text-decoration: underline;
-    }
+.daily-item {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(50,0,70,0.4);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+.daily-item img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 5px;
+}
 </style>
 </head>
 <body>
@@ -91,43 +98,109 @@
     <h1>Pour Marie 💜</h1>
     <div class="countdown" id="countdown"></div>
 
-    <div class="message-box" id="message-box">
-        <p>Initialization</p>
+    <div id="daily-list">
+        <!-- Les messages du jour apparaîtront ici -->
     </div>
 </div>
 
 <script>
-    // ---- Compte à rebours ----
-    const countdown = document.getElementById('countdown');
-    const targetDate = new Date('August 24, 2025 13:30:00').getTime();
+// ---- Compte à rebours ----
+const countdown = document.getElementById('countdown');
+const targetDate = new Date('August 24, 2025 13:30:00').getTime();
 
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const days = Math.floor(distance / (1000*60*60*24));
+    const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+    const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+    const seconds = Math.floor((distance % (1000*60)) / 1000);
 
-        countdown.innerHTML = `${days} jours ${hours}h ${minutes}m ${seconds}s`;
+    countdown.innerHTML = `${days} jours ${hours}h ${minutes}m ${seconds}s`;
 
-        if (distance < 0) {
-            countdown.innerHTML = "On se retrouve maintenant ! J'ai hâte de te voir :)";
-        }
+    if(distance < 0){
+        countdown.innerHTML = "On se retrouve maintenant ! 💜";
     }
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
 
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+// ---- Liste quotidienne ----
+// Définis tes 10 jours avec messages/photos
+const dailyData = [
+    {
+        title: "Souvenir 1",
+        text: "Premier souvenir avec Marie...",
+        images: ["images/photo1.jpg","images/photo2.jpg"]
+    },
+    {
+        title: "Souvenir 2",
+        text: "Une autre journée mémorable...",
+        images: ["images/photo3.jpg"]
+    },
+    {
+        title: "Souvenir 3",
+        text: "Souvenir du 3ème jour",
+        images: ["images/photo4.jpg","images/photo5.jpg"]
+    },
+    {
+        title: "Souvenir 4",
+        text: "Souvenir du 4ème jour",
+        images: ["images/photo6.jpg"]
+    },
+    {
+        title: "Souvenir 5",
+        text: "Souvenir du 5ème jour",
+        images: ["images/photo7.jpg"]
+    },
+    {
+        title: "Souvenir 6",
+        text: "Souvenir du 6ème jour",
+        images: ["images/photo8.jpg"]
+    },
+    {
+        title: "Souvenir 7",
+        text: "Souvenir du 7ème jour",
+        images: ["images/photo9.jpg"]
+    },
+    {
+        title: "Souvenir 8",
+        text: "Souvenir du 8ème jour",
+        images: ["images/photo10.jpg"]
+    },
+    {
+        title: "Souvenir 9",
+        text: "Souvenir du 9ème jour",
+        images: ["images/photo11.jpg"]
+    },
+    {
+        title: "Souvenir 10",
+        text: "Souvenir du 10ème jour",
+        images: ["images/photo12.jpg"]
+    },
+];
 
-    // ---- Messages dynamiques ----
-    const messages = [
-        `<p>Bonjour Marie, aujourd'hui, pense à sourire et profiter des gens autour de toi 🌟</p>`,
-        `<p>Je t'aime ! 💜</p>`,
-    ];
+// Calcul du jour du mois pour sélectionner l'élément
+function getDailyItem(){
+    const now = new Date();
+    let dayIndex = now.getDate() % dailyData.length; // 0 à 9
+    if(now.getHours() >= 12){ dayIndex = (dayIndex + 1) % dailyData.length; } // change à midi
+    return dailyData[dayIndex];
+}
 
-    const messageBox = document.getElementById('message-box');
-    messageBox.innerHTML = messages.join('');
+// Affichage
+const dailyList = document.getElementById('daily-list');
+const item = getDailyItem();
+
+const dailyHTML = `
+    <div class="daily-item">
+        <h2>${item.title}</h2>
+        <p>${item.text}</p>
+        ${item.images.map(img => `<img src="${img}" alt="photo souvenir">`).join('')}
+    </div>
+`;
+dailyList.innerHTML = dailyHTML;
 </script>
 
 </body>
