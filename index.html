@@ -9,24 +9,31 @@
     body {
         margin: 0;
         font-family: 'Arial', sans-serif;
-        background: radial-gradient(ellipse at bottom, #1a0b3b 0%, #0d001a 100%);
         color: #e0d7ff;
         overflow-x: hidden;
     }
 
-    /* ---- Fond étoilé ---- */
+    /* ---- Fond étoilé avec miroir et zoom ---- */
     .stars {
         position: fixed;
         width: 100%;
         height: 100%;
-        background: transparent url('https://images.unsplash.com/photo-1465101162946-4377e57745c3?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Zm9uZCUyMGQnJUMzJUE5Y3JhbiUyMGNpZWwlMjBub2N0dXJuZXxlbnwwfHwwfHx8MA%3D%3D') repeat top center;
+        background: url('https://images.unsplash.com/photo-1465101162946-4377e57745c3?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Zm9uZCUyMGQnJUMzJUE5Y3JhbiUyMGNpZWwlMjBub2N0dXJuZXxlbnwwfHwwfHx8MA%3D%3D') no-repeat center center;
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+        transform: scaleX(-1) scaleY(-1); /* miroir pour éviter les transitions visibles */
         z-index: -1;
-        animation: starMove 200s linear infinite;
+        filter: brightness(0.3); /* assombrit le fond pour faire ressortir le texte */
     }
 
-    @keyframes starMove {
-        from {background-position: 0 0;}
-        to {background-position: -10000px 0;}
+    /* ---- Overlay pour améliorer contraste du texte ---- */
+    .overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 0, 30, 0.5);
+        z-index: -1;
     }
 
     /* ---- Conteneur principal ---- */
@@ -35,30 +42,34 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 100vh;
+        min-height: 100vh;
         text-align: center;
         padding: 20px;
+        text-shadow: 0 0 10px rgba(0,0,0,0.7);
     }
 
     h1 {
         font-size: 3em;
         margin-bottom: 0.2em;
         color: #d9b3ff;
+        text-shadow: 2px 2px 8px #000000;
     }
 
     .countdown {
         font-size: 2em;
         margin: 20px 0;
+        text-shadow: 1px 1px 5px #000000;
     }
 
     .message-box {
-        background: rgba(50, 0, 50, 0.5);
+        background: rgba(30, 0, 60, 0.6);
         border-radius: 15px;
-        padding: 20px;
-        max-width: 500px;
+        padding: 25px;
+        max-width: 600px;
         margin-top: 20px;
         text-align: left;
         word-wrap: break-word;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
 
     a {
@@ -72,16 +83,16 @@
 </style>
 </head>
 <body>
+
 <div class="stars"></div>
+<div class="overlay"></div>
 
 <div class="container">
     <h1>Pour Marie 💜</h1>
     <div class="countdown" id="countdown"></div>
 
     <div class="message-box" id="message-box">
-        <!-- Messages du jour -->
         <p>Initialization</p>
-
     </div>
 </div>
 
@@ -102,7 +113,7 @@
         countdown.innerHTML = `${days} jours ${hours}h ${minutes}m ${seconds}s`;
 
         if (distance < 0) {
-            countdown.innerHTML = "On se retourve maintenant ! J'ai hâte de te voir :)";
+            countdown.innerHTML = "On se retrouve maintenant ! J'ai hâte de te voir :)";
         }
     }
 
@@ -110,10 +121,9 @@
     updateCountdown();
 
     // ---- Messages dynamiques ----
-    // Tu peux facilement modifier ce tableau pour changer le message du jour
     const messages = [
-        `<p>Bonjour Marie, aujourd'hui, pense à sourire et profiter es gens uper autour de toi.</p>`,
-        `<p>Je t'aime !</p>`,
+        `<p>Bonjour Marie, aujourd'hui, pense à sourire et profiter des gens autour de toi 🌟</p>`,
+        `<p>Je t'aime ! 💜</p>`,
     ];
 
     const messageBox = document.getElementById('message-box');
