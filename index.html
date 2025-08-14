@@ -131,7 +131,7 @@ const dailyData = [
     {
         title: "Souvenir 1",
         text: "Premier souvenir avec Marie...",
-        images: ["images/test1.jpg","images/test2.jpg"]
+        images: ["images/test1.png","images/test2.jpg"]
     },
     {
         title: "Souvenir 2",
@@ -182,23 +182,13 @@ const dailyData = [
 
 // Fonction pour obtenir le souvenir du jour basé sur midi
 function getDailyItem() {
-    const now = new Date();
+    const now = new Date().getTime();
+    const distance = targetDate - now;
 
-    // On définit un point de départ fixe, par exemple 1er août 2025
-    const startDate = new Date('August 1, 2025 12:00:00');
+    const days = Math.floor(distance / (1000*60*60*24));
 
-    // On calcule la différence en jours
-    let diff = now - startDate;
-    let daysSinceStart = Math.floor(diff / (1000*60*60*24));
 
-    // Si l'heure actuelle est >= 12h, on reste sur le même souvenir jusqu'au lendemain 12h
-    const hours = now.getHours();
-    if (hours >= 12) {
-        daysSinceStart += 1;
-    }
-
-    const dayIndex = daysSinceStart % dailyData.length;
-    return dailyData[dayIndex];
+    return dailyData[9-days];
 }
 
 // Affichage
