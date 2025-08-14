@@ -20,7 +20,7 @@ body {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: url('images/fond_espace.jpg') no-repeat center center;
+    background: url('https://images.unsplash.com/photo-1465101162946-4377e57745c3?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Zm9uZCUyMGQnJUMzJUE5Y3JhbiUyMGNpZWwlMjBub2N0dXJuZXxlbnwwfHwwfHx8MA%3D%3D') no-repeat center center;
     background-size: cover;
     background-repeat: repeat;
     transform: scaleX(-1) scaleY(-1);
@@ -127,12 +127,11 @@ setInterval(updateCountdown, 1000);
 updateCountdown();
 
 // ---- Liste quotidienne ----
-// Définis tes 10 jours avec messages/photos
 const dailyData = [
     {
         title: "Souvenir 1",
         text: "Premier souvenir avec Marie...",
-        images: ["images/photo1.jpg","images/photo2.jpg"]
+        images: ["images/test1.jpg","images/test2.jpg"]
     },
     {
         title: "Souvenir 2",
@@ -181,11 +180,24 @@ const dailyData = [
     },
 ];
 
-// Calcul du jour du mois pour sélectionner l'élément
-function getDailyItem(){
+// Fonction pour obtenir le souvenir du jour basé sur midi
+function getDailyItem() {
     const now = new Date();
-    let dayIndex = now.getDate() % dailyData.length; // 0 à 9
-    if(now.getHours() >= 12){ dayIndex = (dayIndex + 1) % dailyData.length; } // change à midi
+
+    // On définit un point de départ fixe, par exemple 1er août 2025
+    const startDate = new Date('August 1, 2025 12:00:00');
+
+    // On calcule la différence en jours
+    let diff = now - startDate;
+    let daysSinceStart = Math.floor(diff / (1000*60*60*24));
+
+    // Si l'heure actuelle est >= 12h, on reste sur le même souvenir jusqu'au lendemain 12h
+    const hours = now.getHours();
+    if (hours >= 12) {
+        daysSinceStart += 1;
+    }
+
+    const dayIndex = daysSinceStart % dailyData.length;
     return dailyData[dayIndex];
 }
 
