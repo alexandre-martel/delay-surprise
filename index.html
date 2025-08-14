@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pour Marie 💜</title>
+<style>
+    /* ---- Couleurs nuit violette ---- */
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background: radial-gradient(ellipse at bottom, #1a0b3b 0%, #0d001a 100%);
+        color: #e0d7ff;
+        overflow-x: hidden;
+    }
+
+    /* ---- Fond étoilé ---- */
+    .stars {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: transparent url('https://images.unsplash.com/photo-1465101162946-4377e57745c3?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Zm9uZCUyMGQnJUMzJUE5Y3JhbiUyMGNpZWwlMjBub2N0dXJuZXxlbnwwfHwwfHx8MA%3D%3D') repeat top center;
+        z-index: -1;
+        animation: starMove 200s linear infinite;
+    }
+
+    @keyframes starMove {
+        from {background-position: 0 0;}
+        to {background-position: -10000px 0;}
+    }
+
+    /* ---- Conteneur principal ---- */
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 3em;
+        margin-bottom: 0.2em;
+        color: #d9b3ff;
+    }
+
+    .countdown {
+        font-size: 2em;
+        margin: 20px 0;
+    }
+
+    .message-box {
+        background: rgba(50, 0, 50, 0.5);
+        border-radius: 15px;
+        padding: 20px;
+        max-width: 500px;
+        margin-top: 20px;
+        text-align: left;
+        word-wrap: break-word;
+    }
+
+    a {
+        color: #ffb3ff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+<div class="stars"></div>
+
+<div class="container">
+    <h1>Pour Marie 💜</h1>
+    <div class="countdown" id="countdown"></div>
+
+    <div class="message-box" id="message-box">
+        <!-- Messages du jour -->
+        <p>Initialization</p>
+
+    </div>
+</div>
+
+<script>
+    // ---- Compte à rebours ----
+    const countdown = document.getElementById('countdown');
+    const targetDate = new Date('August 24, 2025 13:30:00').getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdown.innerHTML = `${days} jours ${hours}h ${minutes}m ${seconds}s`;
+
+        if (distance < 0) {
+            countdown.innerHTML = "On se retourve maintenant ! J'ai hâte de te voir :)";
+        }
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // ---- Messages dynamiques ----
+    // Tu peux facilement modifier ce tableau pour changer le message du jour
+    const messages = [
+        `<p>Bonjour Marie, aujourd'hui, pense à sourire et profiter es gens uper autour de toi.</p>`,
+        `<p>Je t'aime !</p>`,
+    ];
+
+    const messageBox = document.getElementById('message-box');
+    messageBox.innerHTML = messages.join('');
+</script>
+
+</body>
+</html>
