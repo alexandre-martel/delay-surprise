@@ -196,7 +196,7 @@ function getDailyItem() {
     }
 
     // Calcul de l'index dans dailyData
-    const index = (dailyData.length - 1 - daysSinceTarget % dailyData.length + dailyData.length) % dailyData.length;
+    const index = (dailyData.length - 2 - daysSinceTarget % dailyData.length + dailyData.length) % dailyData.length;
 
     return dailyData[index];
 }
