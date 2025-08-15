@@ -105,6 +105,12 @@ a:hover { text-decoration: underline; }
    
 </div>
 
+<style>
+.daily-item p {
+    text-align: left;
+}
+</style>
+
 <script>
 // ---- Compte à rebours ----
 const countdown = document.getElementById('countdown');
@@ -190,7 +196,7 @@ const item = dailyData[currentIndex];
 const dailyHTML = `
     <div class="daily-item">
         <h2>${item.title}</h2>
-        <p>${item.text.replace(/\n/g, '<br>')}</p>
+        <p>${item.text.replace(/\n/g, '<br><br>')}</p>
         ${item.images.map(img => `<img src="${img}" alt="photo souvenir">`).join('')}
         <p>PS : Je t'aime Marie !</p>
     </div>
