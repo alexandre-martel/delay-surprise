@@ -182,28 +182,10 @@ const dailyData = [
     },
 ];
 
-// Fonction pour obtenir le souvenir du jour basé sur midi
-function getDailyItem() {
-    const now = new Date();
-    
-    // Calcul de la différence en jours depuis targetDate
-    const diff = targetDate - now.getTime();
-    let daysSinceTarget = Math.floor(diff / (1000*60*60*24));
+let currentIndex = 1; 
 
-    // Si l'heure actuelle est >= 12h, on avance d'un souvenir
-    if (now.getHours() >= 12) {
-        daysSinceTarget -= 1; // On décrémente pour passer au souvenir suivant
-    }
-
-    // Calcul de l'index dans dailyData
-    const index = (dailyData.length - 2 - daysSinceTarget % dailyData.length + dailyData.length) % dailyData.length;
-
-    return dailyData[index];
-}
-
-// Affichage
 const dailyList = document.getElementById('daily-list');
-const item = getDailyItem();
+const item = dailyData[currentIndex];
 
 const dailyHTML = `
     <div class="daily-item">
