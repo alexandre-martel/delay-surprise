@@ -195,12 +195,12 @@ function getDailyItem() {
 
     // nombre total de jours écoulés depuis le départ
     let daysElapsed = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
-    
+
     return dailyData[index];
 }
 
 const dailyList = document.getElementById('daily-list');
-const item = dailyData[currentIndex];
+const item = getDailyItem();
 
 const dailyHTML = `
     <div class="daily-item">
