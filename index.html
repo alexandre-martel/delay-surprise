@@ -144,7 +144,7 @@ const dailyData = [
     {
         title: "Premiers souvenirs ensembles !",
         text: "J'ai plein de choses à dire ! et plus de photos encore pour toi :) \n Lors du nouvel an, je me suis sincerement posé des question, par la suite, sur la destinée. Non pas que je pense qu'il y ai un petit génie dernière nous pour réaliser nos souhaits, mais plutôt si, à force de penser à une personne, cette personne n'allais pas apparître par hasard dans notre vie comme à ce moment là :) \n Ce fut une soirée inoubliable pour moi... saches le ! \n Cela me rappel aussi les premiers souvenir de nous deux au quotidien, qui malgré leurs défaults et les problèmes que cela a pu crée à long terme, étaient des moments de joie et de bonheur, en tout cas pour moi et pour toi aussi je l'espère... \n Je ferais attention, à l'avenir, à faire en sorte que tu ne t'ennuie pas, tout en ayant le temps de te reposer ainsi que d'avoir l'esprit tranquille sans avoir à te poser des questions en permanence car tout ira bien ! \n Je suis sûr que ton voyage à Taizé t'aide aussi pas mal là dessus et je susi sincèrement content de te voir être heureuse comme ça, presque jaloux que ce soient d'autre personnes qui te rendent si heureuse xD, mais ne t'inquiètes pas, je reviens remplis de nouvelles idées à la rentrée ! \n Enfin, j'ai ici quelques souvenirs du premier voyage en Normandie, qui, bien que très calme, fut un moment ou j'ai pu me poser enfin avec toi, à deux. Et cette tranquilité n'a eu aucun équivalent à part me second voyage en Normandie jusqu'à aujourd'hui. J'aimerais beaucoup que l'on y retourne ensemble :)",
-        images: ["images/Maison1.jpeg","images/Maison1.jpeg", "images/Maison2.jpeg", "images/Maison3.jpeg", "images/Maison4.jpeg", "images/Maison5.jpeg", "images/Maison6.jpeg", "images/NouvelAn1.jpeg", "images/NouvelAn2.jpeg", "images/NouvelAn3.jpeg", "images/NormBis1.jpeg", "images/NormBis2.jpeg", "images/NormBis3.jpeg", "images/NormBis4.jpeg", "images/NormBis5.jpeg"]
+        images: [ "images/NouvelAn1.jpeg", "images/NouvelAn2.jpeg", "images/NouvelAn3.jpeg","images/Maison1.jpeg", "images/Maison2.jpeg", "images/Maison3.jpeg", "images/Maison4.jpeg", "images/Maison5.jpeg", "images/Maison6.jpeg", "images/NormBis1.jpeg", "images/NormBis2.jpeg", "images/NormBis3.jpeg", "images/NormBis4.jpeg", "images/NormBis5.jpeg"]
     },
     {
         title: "Souvenir 3",
@@ -195,7 +195,7 @@ function getDailyItem() {
 
     // nombre total de jours écoulés depuis le départ
     let daysElapsed = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
-
+    console.log("Days elapsed since start date:", daysElapsed);
     return dailyData[index];
 }
 
